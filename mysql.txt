@@ -1,0 +1,9 @@
+DBeaver是一款免费的数据库管理应用程序，可运用于多种不同的引擎，包括MySQL，MSSQL，Oracle、SQLite、Sybase和Firebird等等。由Java编写而成，该应用程序适用于所有主流操作系统(Windows、Mac和Linux)。它能处理包括元数据编辑(表、列、键、索引)、自定义SQL执行、用户管理、多连接等在内的所有主要任务。
+
+需要安装：
+
+    mysql-5.1.33-win32.msi
+    dbeaver-ce-4.0.8-win32.win32.x86_64.zip
+    JDK jdk-8u66-windows-x64.exe
+    mysql JCDB驱动：mysql-connector-java-5.1.42.zip
+

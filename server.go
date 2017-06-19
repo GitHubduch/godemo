@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"io/ioutil"
 	"net/http"
 	"time"
 )
@@ -30,7 +31,7 @@ func WebServerBase() {
 	http.HandleFunc("/login", loginTask)
 
 	//服务器要监听的主机地址和端口号
-	err := http.ListenAndServe("172.28.154.138:8090", nil)
+	err := http.ListenAndServe("localhost:8090", nil)
 
 	if err != nil {
 		fmt.Println("ListenAndServe error: ", err.Error())
@@ -43,6 +44,10 @@ func loginTask(w http.ResponseWriter, req *http.Request) {
 
 	//模拟延时
 	time.Sleep(time.Second * 2)
+
+	//读取到json数据
+	body, err := ioutil.ReadAll(req.Body)
+	fmt.Println(string(body))
 
 	//获取客户端通过GET/POST方式传递的参数
 	req.ParseForm()
@@ -58,11 +63,11 @@ func loginTask(w http.ResponseWriter, req *http.Request) {
 	userName := param_userName[0]
 	passWord := param_passWord[0]
 
-	db, err := sql.Open("mysql", "root:duch@123@tcp(127.0.0.1:3306)/?charset=utf8") //第一个参数为驱动名
+	db, err := sql.Open("mysql", "root:duch123@tcp(127.0.0.1:3306)/?charset=utf8") //第一个参数为驱动名
 	checkErr(err)
 	fmt.Println("DB open successful!")
 
-	res := db.QueryRow("select * from loginuser.userpwd where user=?", userName)
+	res := db.QueryRow("select * from godb.login where user=?", userName)
 
 	err = res.Scan(&username, &password)
 	checkErr(err)
